@@ -92,7 +92,7 @@ make sonar-scan
 
 ### Diagramas de classes
 
-![Diagramas de classes](./docs/images/diagramas_de_classes/diagrama_de_classes_company.svg)
+![Diagramas de classes](./docs/images/diagramas_de_classes/diagrama_de_classes.svg)
 
 ## Help?
 
