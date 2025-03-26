@@ -1,0 +1,122 @@
+@startuml "Diagrama de Classes"
+
+' Entity
+
+entity Address {
+  {field} +contry: CountryAlpha2
+  {field} +zipcode: str
+  {field} +state: str
+  {field} +city: str
+  {field} +street: str
+  {field} +neighborhood: str
+  {field} +address_number: str
+  {field} +address_complement: str | None
+
+  {method} +validate_code(value: str) -> str
+}
+
+entity Car {
+  {field} +make: str
+  {field} +model: str
+  {field} +year: int
+  {field} +value: Decimal
+
+  {method} +year_must_be_valid(date: int) -> int
+}
+
+entity InsuranceInputDto {
+  {field} +car: Car
+  {field} +deductible_percentage: Decimal
+  {field} +broker_fee: Decimal
+  {field} +registration_location: Address | None = None
+}
+
+entity InsuranceOutputDto {
+  {field} +id: UUID4
+  {field} +car: Car
+  {field} +applied_rate: Decimal
+  {field} +policy_limit: Decimal
+  {field} +calculated_premium: Decimal
+  {field} +deductible_value: Decimal
+}
+
+Car -> InsuranceInputDto
+Address -> InsuranceInputDto
+Car -> InsuranceOutputDto
+
+' Use cases
+
+' DynamicRateCalculation
+interface DynamicRateCalculationInterface {
+  {method} +calculate_rate_per_year(car: Car) -> Decimal
+  {method} +calculate_rate_per_value(car: Car) -> Decimal
+  {method} +calculate_rate(rate_per_year: Decimal,rate_per_value: Decimal) -> Decimal
+  {method} +execute(car: Car) -> Decimal
+}
+
+class DynamicRateCalculation {
+  {method} +calculate_rate_per_year(car: Car) -> Decimal
+  {method} +calculate_rate_per_value(car: Car) -> Decimal
+  {method} +calculate_rate(rate_per_year: Decimal,rate_per_value: Decimal) -> Decimal
+  {method} +execute(car: Car) -> Decimal
+}
+
+DynamicRateCalculationInterface <|.. DynamicRateCalculation
+DynamicRateCalculationInterface --o Car
+DynamicRateCalculation --o Car
+
+' PremiumCalculation
+interface PremiumCalculationInterface {
+  {method} +get_base_premium(car: Car, applied_rate: Decimal) -> Decimal
+  {method} +get_deductible_discount(base_premium: Decimal) -> Decimal
+  {method} +get_final_premium(base_premium: Decimal, deductible_discount: Decimal) -> Decimal
+  {method} +execute(car: Car, applied_rate: Decimal) -> Decimal
+}
+
+class PremiumCalculation {
+  {method} +get_base_premium(car: Car, applied_rate: Decimal) -> Decimal
+  {method} +get_deductible_discount(base_premium: Decimal) -> Decimal
+  {method} +get_final_premium(base_premium: Decimal, deductible_discount: Decimal) -> Decimal
+  {method} +execute(car: Car, applied_rate: Decimal) -> Decimal
+}
+
+PremiumCalculationInterface <|.. PremiumCalculation
+PremiumCalculationInterface --o Car
+PremiumCalculation --o Car
+
+
+' PolicyCalculation
+interface PolicyCalculationInterface {
+  {method} +get_base_policy_limit(car: Car) -> Decimal
+  {method} +get_deductible_value(base_policy_limit: Decimal) -> Decimal
+  {method} +get_final_policy_limit(base_policy_limit: Decimal, deductible_value: Decimal) -> Decimal
+  {method} +execute(car: Car) -> Policy
+}
+
+class PolicyCalculation {
+  {method} +get_base_policy_limit(car: Car) -> Decimal
+  {method} +get_deductible_value(base_policy_limit: Decimal) -> Decimal
+  {method} +get_final_policy_limit(base_policy_limit: Decimal, deductible_value: Decimal) -> Decimal
+  {method} +execute(car: Car) -> Policy
+}
+
+PolicyCalculationInterface <|.. PolicyCalculation
+PolicyCalculationInterface --o Car
+PolicyCalculation --o Car
+
+
+' GetInsurance
+class GetInsurance {
+  {static} +dynamic_rate_calculation: DynamicRateCalculationInterface
+  {static} +premium_calculation: PremiumCalculationInterface
+  {static} +policy_calculation: PolicyCalculationInterface
+
+  {method} +build_entity(input_dto: InsuranceInputDto, applied_rate: Decimal, policy_limit: Decimal, calculated_premium: Decimal, deductible_value: Decimal) -> InsuranceOutputDto
+  {method} +execute(id: str) -> InsuranceOutputDto
+}
+
+GetInsurance --o InsuranceInputDto
+GetInsurance --o InsuranceOutputDto
+
+
+@enduml
