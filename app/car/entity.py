@@ -12,7 +12,7 @@ class Car(EntityModel):
     model: str
     year: int
     value: Decimal = Field(
-        max_digits=6,
+        max_digits=9,
         decimal_places=2,
         gt=0,
     )
