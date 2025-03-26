@@ -18,7 +18,8 @@ class Car(EntityModel):
     )
 
     @field_validator("year")
-    def year_must_be_valid(cls, date: int) -> int:  # noqa: N805
+    @classmethod
+    def year_must_be_valid(cls, date: int) -> int:
         minimum_year: int = 1900
         if date < minimum_year or date > datetime.now(tz=timezone.utc).year:
             raise ValueError(APPLICATION_YEAR_VALIDATION_ERROR)
