@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-25 22:45-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app/locale/messages.py:5
+msgid "Year must be valid"
+msgstr ""
+
+#, python-brace-format
+#~ msgid "Sorter not found: {sorter}"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, python-brace-format
+#~ msgid "Sorter ordered not found: {order}"
+#~ msgstr "Campo do Ordenador não encontrado: {order}"
+
+#, fuzzy
+#~ msgid "Company not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "School Year not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Grade not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Classroom not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Subject not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Test not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Test Student not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Field not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Form not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy
+#~ msgid "Form Response not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
+
+#, fuzzy, python-brace-format
+#~ msgid "{entity} not found"
+#~ msgstr "Ordenador não encotrado: {sorter}"
