@@ -1,0 +1,149 @@
+[project]
+# Support Python 3.10+.
+requires-python = ">=3.10"
+name = "car-insurance-simulator"
+version = "1.0.0"
+authors = [
+    { name="Rauan Sanfelice", email="rauan.sanfelice@gmail.com"}
+]
+
+[tool.ruff]
+include = ["pyproject.toml", "app/**/*.py", "tests/**/*.py", "scripts/**/*.py"]
+show-fixes = true
+respect-gitignore = true
+fix = true
+exclude = ["venv"]
+
+# Set the maximum line length to 88.
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+# Add the `line-too-long` rule to the enforced rule set.
+preview = true
+extend-select = [
+    "F",  # Pyflakes
+    "E",  # pycodestyle
+    "W",  # pycodestyle
+    "N",  # pep8-naming
+    # "D",  # pydocstyle
+    "UP",  # pyupgrade
+    # "ANN",  # flake8-annotations
+    "ASYNC",  # flake8-async
+    "BLE",  # flake8-blind-except
+    "FBT",  # flake8-boolean-trap
+    "B",  # flake8-bugbear
+    "COM",  # flake8-commas
+    "C4",  # flake8-comprehensions
+    "DTZ",  # flake8-datetimez
+    "T10",  # flake8-debugger
+    "EM",  # flake8-errmsg
+    # "EXE",  # flake8-executable
+    "FA",  # flake8-future-annotations
+    "ISC",  # flake8-implicit-str-concat
+    "ICN",  # flake8-import-conventions
+    "LOG",  # flake8-logging
+    "G",  # flake8-logging-format
+    "INP",  # flake8-no-pep420
+    "PIE",  # flake8-pie
+    "T20",  # flake8-print
+    "PYI",  # flake8-pyi
+    "PT",  # flake8-pytest-style
+    "Q",  # flake8-quotes
+    "RSE",  # flake8-raise
+    "RET",  # flake8-return
+    "SLF",  # flake8-self
+    "SIM",  # flake8-simplify
+    "TID",  # flake8-tidy-imports
+    "TC",  # flake8-type-checking
+    "INT",  # flake8-gettext
+    "ARG",  # flake8-unused-arguments
+    "PTH",  # flake8-use-pathlib
+    # "TD",  # flake8-todos
+    "FIX",  # flake8-fixme
+    "PL",  # Pylint
+    "TRY",  # tryceratops
+    "FLY",  # flynt
+    "FAST",  # FastAPI
+    "PERF",  # Perflint
+    "FURB",  # refurb
+    # "DOC",  # pydoclint
+    "RUF",  # Ruff-specific rules
+    "I",  # isort
+]
+ignore = [
+    "D100",
+    "D101",
+    "D104",
+    "PLR6301",
+    "COM812",
+    "ISC001",
+    "PLR0913",
+    "PLR0917",
+    "FIX002",
+]
+extend-ignore = ["ARG002"]
+
+# Excluir a pasta de testes completamente ou de outras pastas específicas, se necessário
+exclude = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
+
+# 4. Ignore `E402` (import violations) in all `__init__.py` files, and in selected subdirectories.
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = [
+    "DTZ001",
+    "E402",
+    "E501",
+    "PLR2004",
+    "PT011",
+    "RUF012",
+    "SLF001",
+]
+
+[tool.ruff.lint.pycodestyle]
+ignore-overlong-task-comments = true
+
+
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = [
+    # Allow Pydantic's `@validator` decorator to trigger class method treatment.
+    "pydantic.validator",
+    # Allow SQLAlchemy's dynamic decorators, like `@field.expression`, to trigger class method treatment.
+    "declared_attr",
+    "expression",
+    "comparator",
+]
